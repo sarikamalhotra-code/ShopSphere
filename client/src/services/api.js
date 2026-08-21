@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL =
+    import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const api = axios.create({
     baseURL: API_URL,
@@ -9,7 +10,6 @@ const api = axios.create({
     },
 });
 
-// ================= TOKEN INTERCEPTOR =================
 
 api.interceptors.request.use(
     (config) => {
@@ -26,8 +26,6 @@ api.interceptors.request.use(
     }
 );
 
-// ================= AUTH =================
-
 export const registerUser = async (userData) => {
     const response = await api.post("/auth/register", userData);
     return response.data;
@@ -41,16 +39,12 @@ export const loginUser = async (userData) => {
     }
 
     if (response.data.user) {
-        localStorage.setItem(
-            "user",
+        localStorage.setItem("user",
             JSON.stringify(response.data.user)
         );
 
         if (response.data.user.role) {
-            localStorage.setItem(
-                "role",
-                response.data.user.role
-            );
+            localStorage.setItem("role", response.data.user.role);
         }
     }
 
@@ -62,8 +56,6 @@ export const logoutUser = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("role");
 };
-
-// ================= PRODUCTS =================
 
 export const getProducts = async () => {
     const response = await api.get("/products");
@@ -81,11 +73,7 @@ export const createProduct = async (productData) => {
 };
 
 export const updateProduct = async (id, productData) => {
-    const response = await api.put(
-        `/products/${id}`,
-        productData
-    );
-
+    const response = await api.put(`/products/${id}`, productData);
     return response.data;
 };
 
@@ -94,14 +82,12 @@ export const deleteProduct = async (id) => {
     return response.data;
 };
 
-// ================= CART =================
-
 export const getCart = async () => {
     const response = await api.get("/cart");
     return response.data;
 };
 
-export const addToCart = async (productId, quantity = 1) => {
+export const addToCart = async ( productId, quantity = 1) => {
     const response = await api.post("/cart", {
         productId,
         quantity,
@@ -111,21 +97,16 @@ export const addToCart = async (productId, quantity = 1) => {
 };
 
 export const updateCartItem = async (productId, quantity) => {
-    const response = await api.put(
-        `/cart/${productId}`,
+    const response = await api.put(`/cart/${productId}`,
         {
             quantity,
         }
     );
-
     return response.data;
 };
 
 export const removeFromCart = async (productId) => {
-    const response = await api.delete(
-        `/cart/${productId}`
-    );
-
+    const response = await api.delete(`/cart/${productId}`);
     return response.data;
 };
 
@@ -134,14 +115,8 @@ export const clearCart = async () => {
     return response.data;
 };
 
-// ================= ORDERS =================
-
 export const createOrder = async (orderData) => {
-    const response = await api.post(
-        "/orders",
-        orderData
-    );
-
+    const response = await api.post("/orders", orderData);
     return response.data;
 };
 
@@ -151,14 +126,9 @@ export const getMyOrders = async () => {
 };
 
 export const getOrderById = async (id) => {
-    const response = await api.get(
-        `/orders/${id}`
-    );
-
+    const response = await api.get(`/orders/${id}`);
     return response.data;
 };
-
-// ================= ADMIN =================
 
 export const getAdminStats = async () => {
     const response = await api.get("/admin/stats");
@@ -171,16 +141,12 @@ export const getAllOrders = async () => {
 };
 
 export const getRecentOrders = async () => {
-    const response = await api.get(
-        "/admin/recent-orders"
-    );
-
+    const response = await api.get("/admin/recent-orders");
     return response.data;
 };
 
-export const updateOrderStatus = async (id, status) => {
-    const response = await api.put(
-        `/admin/orders/${id}/status`,
+export const updateOrderStatus = async (id,status) => {
+    const response = await api.put(`/admin/orders/${id}/status`,
         {
             status,
         }
@@ -188,7 +154,5 @@ export const updateOrderStatus = async (id, status) => {
 
     return response.data;
 };
-
-// ================= DEFAULT EXPORT =================
 
 export default api;
