@@ -7,6 +7,7 @@ export default defineConfig({
 
     css: {
         transformer: "postcss",
+        minify: false,
     },
 
     resolve: {
