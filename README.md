@@ -45,8 +45,6 @@ It provides a complete shopping experience for customers along with an admin das
 - Automatic COD Payment Status Update
 - Recent Orders Dashboard
 
----
-
 ## 💳 Payment
 
 Currently, ShopSphere supports:
@@ -57,8 +55,6 @@ For COD orders:
 
 - Payment status remains `Pending` before delivery.
 - Payment status automatically changes to `Paid` when the order is marked as `Delivered`.
-
----
 
 ## 🧑‍💻 Tech Stack
 
@@ -129,6 +125,8 @@ Protected routes are available for:
 
 Customers
 Admins
+
+
 📦 Order Management
 
 The application supports the following order statuses:
@@ -154,17 +152,24 @@ Frontend
 The frontend uses the deployed backend API:
 
 https://shopsphere-8v7i.onrender.com/api
+
 🛠️ Local Setup
+
 1. Clone the repository
+   
 git clone https://github.com/sarikamalhotra-code/ShopSphere.git
-2. Backend Setup
+
+3. Backend Setup
+   
 cd ShopSphere/server
+
 npm install
 npm run dev
 
 Backend runs on:
 
 http://localhost:5000
+
 3. Frontend Setup
 
 Open another terminal:
@@ -176,6 +181,7 @@ npm run dev
 Frontend runs on:
 
 http://localhost:5173
+
 🔗 API Base URL
 
 Production API:
@@ -190,6 +196,7 @@ Main API modules:
 /api/orders
 /api/users
 /api/admin
+
 📊 Admin Dashboard
 
 The admin dashboard provides:
